@@ -1,14 +1,15 @@
 "use client";
-import { companies } from "../../data/companies";
+
 import Link from "next/link";
 import { useState, useMemo } from "react";
-import { useSearchParams } from "next/navigation";
+import { companies } from "../../data/companies";
 
-
-
-export default function CompaniesPage() {
-  const searchParams = useSearchParams();
-  const initialSearch = searchParams.get("search") || "";
+export default function CompaniesPage({
+  searchParams,
+}: {
+  searchParams?: { search?: string };
+}) {
+  const initialSearch = searchParams?.search || "";
 
   const [search, setSearch] = useState(initialSearch);
   const [sector, setSector] = useState("All");
@@ -49,7 +50,6 @@ export default function CompaniesPage() {
 
       {/* Filters */}
       <div className="grid md:grid-cols-4 gap-3 mb-6">
-
         <input
           className="border p-2 rounded"
           placeholder="Search..."
@@ -95,7 +95,6 @@ export default function CompaniesPage() {
           <option value="asc">Sort A → Z</option>
           <option value="desc">Sort Z → A</option>
         </select>
-
       </div>
 
       {/* Results */}
